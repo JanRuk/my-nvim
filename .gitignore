@@ -1,0 +1,67 @@
+
+# ----------------------------
+# Neovim Configuration .gitignore
+# ----------------------------
+
+# Ignore OS junk files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore temporary swap, backup, and undo files
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+*.undo
+
+# Ignore compiled Lua files
+*.luac
+
+# Ignore Neovim’s local state directories
+# (These are regenerated automatically)
+plugin/
+spell/
+tags
+session/
+sessions/
+shada/
+swap/
+undo/
+backup/
+view/
+
+# Ignore Lazy.nvim plugin manager cache and lock files
+lazy-lock.json
+.lazy/
+lazy/
+nvim-lazy/
+
+# Ignore Mason LSP/DAP/debugger packages
+mason/
+mason-registry.json
+
+# Ignore DAP adapters and debug session caches
+dap/
+nvim-dap/
+
+# Ignore Treesitter parser cache
+parsers/
+parser/
+nvim-treesitter/
+
+# Ignore Copilot/Codeium or AI plugin logs
+copilot/
+codeium/
+*.copilot.json
+
+# Ignore generated documentation or temp notes
+*.tmp.md
+*.bak.md
+*.old
+
+# Allow your actual Lua configs and setup files
+!init.lua
+!lua/**/*
+!README.md
