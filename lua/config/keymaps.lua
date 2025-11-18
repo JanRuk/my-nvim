@@ -1,7 +1,7 @@
 --[[
 ═══════════════════════════════════════════════════════════════════
   Keymaps & Shortcuts
-  
+
   IntelliJ-inspired keybindings for professional workflows
   Leader key: <Space>
   Local leader: <,>
@@ -145,10 +145,34 @@ keymap("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Diagnostics to lo
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Terminal Toggle (toggleterm)
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-keymap("n", "<C-\\>", ":ToggleTerm<CR>", { desc = "Toggle terminal" })
-keymap("t", "<C-\\>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal" })
-keymap("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-- Enhanced Terminal Keymaps
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+-- Main terminal toggle (Ctrl+\)
+keymap("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+keymap("t", "<C-\\>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal" })
+
+-- Multiple terminal instances
+keymap("n", "<leader>t1", "<cmd>1ToggleTerm direction=horizontal<cr>", { desc = "Terminal 1 (horizontal)" })
+keymap("n", "<leader>t2", "<cmd>2ToggleTerm direction=horizontal<cr>", { desc = "Terminal 2 (horizontal)" })
+keymap("n", "<leader>t3", "<cmd>3ToggleTerm direction=vertical size=80<cr>", { desc = "Terminal 3 (vertical)" })
+
+-- Terminal directions
+keymap("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal size=15<cr>", { desc = "Horizontal terminal" })
+keymap("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical size=80<cr>", { desc = "Vertical terminal" })
+keymap("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Floating terminal" })
+keymap("n", "<leader>tt", "<cmd>ToggleTerm direction=tab<cr>", { desc = "Terminal in new tab" })
+
+-- Terminal navigation in terminal mode
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Move to left window" })
+keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Move to bottom window" })
+keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Move to top window" })
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move to right window" })
+
+-- Exit terminal mode
+keymap("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+keymap("t", "jk", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Quick Commands
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
