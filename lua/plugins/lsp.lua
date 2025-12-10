@@ -51,20 +51,20 @@ return {
                     "jdtls", -- Java LSP (will be configured separately)
 
                     -- JavaScript/TypeScript
-                    "ts_ls", -- TypeScript/JavaScript
+                    "ts_ls",  -- TypeScript/JavaScript
                     "eslint", -- ESLint linting
 
                     -- Python
                     "pyright", -- Python LSP
 
                     -- Web
-                    "html", -- HTML
-                    "cssls", -- CSS
+                    "html",   -- HTML
+                    "cssls",  -- CSS
                     "jsonls", -- JSON
 
                     -- DevOps
-                    "yamlls",                -- YAML
-                    "dockerls",              -- Dockerfile
+                    "yamlls",                          -- YAML
+                    "dockerls",                        -- Dockerfile
                     "docker_compose_language_service", -- Docker Compose
 
                     -- SQL
@@ -72,6 +72,8 @@ return {
 
                     -- Lua (for Neovim config)
                     "lua_ls", -- Lua
+                    "gopls",
+                    --"golangci_lint_ls",
                 },
 
                 -- Auto-install missing servers on startup
@@ -156,6 +158,7 @@ return {
                 yaml = { "prettier" },
                 markdown = { "prettier" },
                 lua = { "stylua" },
+                go = { "goimports", "gofumpt" },
             },
             format_on_save = function(bufnr)
                 -- Disable with a global or buffer-local variable

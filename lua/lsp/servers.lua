@@ -1,7 +1,7 @@
 --[[
 ═══════════════════════════════════════════════════════════════════
   LSP Server Configurations
-  
+
   Setup for all language servers (except Java which uses jdtls)
 ═══════════════════════════════════════════════════════════════════
 --]]
@@ -105,7 +105,7 @@ lspconfig.pyright.setup({
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
-    
+
     -- Setup Python-specific features
     local python_config = require("lsp.settings.python")
     python_config.setup_virtualenv()
@@ -198,7 +198,7 @@ lspconfig.sqls.setup({
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
-    
+
     -- SQL-specific keymaps
     local opts = { buffer = bufnr, silent = true }
     vim.keymap.set("n", "<leader>se", "<cmd>SqlsExecuteQuery<CR>", vim.tbl_extend("force", opts, { desc = "Execute SQL query" }))
@@ -219,3 +219,64 @@ vim.api.nvim_create_autocmd("FileType", {
     java_config.setup()
   end,
 })
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-- Go (gopls)
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+lspconfig.gopls.setup({
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+
+    -- Go-specific keymaps
+    local opts = { buffer = bufnr, silent = true }
+    vim.keymap.set("n", "<leader>gi", "<cmd>GoInstallDeps<cr>",
+      vim.tbl_extend("force", opts, { desc = "Go install dependencies" }))
+    vim.keymap.set("n", "<leader>gt", "<cmd>GoTest<cr>",
+      vim.tbl_extend("force", opts, { desc = "Go test" }))
+    vim.keymap.set("n", "<leader>gT", "<cmd>GoTestFunc<cr>",
+      vim.tbl_extend("force", opts, { desc = "Go test function" }))
+  end,
+  settings = {
+    gopls = {
+      gofumpt = true,
+      codelenses = {
+        gc_details = false,
+        generate = true,
+        regenerate_cgo = true,
+        run_govulncheck = true,
+        test = true,
+        tidy = true,
+        upgrade_dependency = true,
+        vendor = true,
+      },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+      analyses = {
+        fieldalignment = true,
+        nilness = true,
+        unusedparams = true,
+        unusedwrite = true,
+        useany = true,
+      },
+      usePlaceholders = true,
+      completeUnimported = true,
+      staticcheck = true,
+      directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+      semanticTokens = true,
+    },
+  },
+})
+
+-- golangci-lint (optional but recommended)
+--lspconfig.golangci_lint_ls.setup({
+  --capabilities = capabilities,
+  --on_attach = on_attach,
+  --filetypes = { "go", "gomod" },
+--})
