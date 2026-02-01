@@ -83,6 +83,29 @@ return {
     },
 
     -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    -- Mason Tool Installer (formatters, linters)
+    -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = { "williamboman/mason.nvim" },
+        config = function()
+            require("mason-tool-installer").setup({
+                ensure_installed = {
+                    "black",
+                    "isort",
+                    "ruff",
+                    "prettier",
+                    "stylua",
+                    "gofumpt",
+                    "goimports",
+                },
+                auto_update = false,
+                run_on_start = true,
+            })
+        end,
+    },
+
+    -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     -- LSP Configuration
     -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     {
@@ -147,7 +170,7 @@ return {
         },
         opts = {
             formatters_by_ft = {
-                python = { "black", "isort" },
+                python = { "ruff_format", "ruff_organize_imports", "black", "isort" },
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 javascriptreact = { "prettier" },
@@ -248,5 +271,3 @@ return {
         lazy = true,
     },
 }
-
--- Add this to lua/plugins/lsp.lua return table

@@ -52,20 +52,43 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<cr>" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>" },
     },
-    opts = {},
+    config = function()
+      local telescope = require("telescope")
+      telescope.setup({})
+      telescope.load_extension("fzf")
+    end,
   },
   
   -- Which-key
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      spec = {
+        { "<leader>f", group = "Find" },
+        { "<leader>g", group = "Git" },
+        { "<leader>d", group = "Debug" },
+        { "<leader>b", group = "Buffer" },
+        { "<leader>l", group = "LSP" },
+        { "<leader>s", group = "Split" },
+        { "<leader>t", group = "Terminal" },
+        { "<leader>h", group = "Git Hunk" },
+        { "<leader>x", group = "Trouble" },
+        { "<leader>D", group = "Database" },
+        { "<leader>q", group = "Session/Quit" },
+        { "<leader>r", group = "REST/Rename" },
+        { "<leader>w", group = "Workspace" },
+      },
+    },
   },
   
   -- Indent guides

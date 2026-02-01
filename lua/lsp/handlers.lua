@@ -117,11 +117,6 @@ M.on_attach = function(client, bufnr)
     end, vim.tbl_extend("force", opts, { desc = "Toggle inlay hints" }))
   end
   
-  -- Notify that LSP is attached
-  vim.notify(
-    string.format("LSP [%s] attached to buffer %d", client.name, bufnr),
-    vim.log.levels.INFO
-  )
 end
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -135,14 +135,6 @@ keymap("n", "<leader>gb", ":Telescope git_branches<CR>", { desc = "Git branches"
 -- <leader>dl   → Show line diagnostics
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
--- Diagnostic Navigation
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-keymap("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Line diagnostics" })
-keymap("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Diagnostics to loclist" })
-
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Terminal Toggle (toggleterm)
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -205,4 +197,4 @@ keymap("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix" })
 --   <leader>dB  → Conditional breakpoint
 --   <leader>dr  → Open REPL
 
-keymap("n", "<leader>tt", "<Cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+

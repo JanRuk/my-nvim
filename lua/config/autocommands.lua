@@ -168,32 +168,8 @@ autocmd("FileType", {
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- LSP-Related Auto Commands
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-local lsp_autoformat = augroup("LspAutoformat", { clear = true })
-
--- Auto-format on save (for specific languages)
--- Note: This will be configured per-buffer when LSP attaches
--- Enabled for: Python (black/isort), JS/TS (prettier), JSON, YAML
-autocmd("BufWritePre", {
-  group = lsp_autoformat,
-  pattern = { "*.py", "*.js", "*.jsx", "*.ts", "*.tsx", "*.json", "*.yaml", "*.yml" },
-  callback = function()
-    -- Only format if LSP is attached and supports formatting
-    local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
-    
-    for _, client in ipairs(clients) do
-      if client.server_capabilities.documentFormattingProvider then
-        vim.lsp.buf.format({
-          async = false,
-          bufnr = bufnr,
-          timeout_ms = 2000,
-        })
-        break
-      end
-    end
-  end,
-  desc = "Auto-format on save",
-})
+-- Format-on-save is handled by conform.nvim in lua/plugins/lsp.lua
+-- Use :FormatDisable / :FormatEnable to toggle
 
 -- Show line diagnostics automatically in hover window
 autocmd("CursorHold", {
@@ -343,7 +319,6 @@ autocmd("BufReadPre", {
       vim.opt_local.foldmethod = "manual"
       vim.opt_local.swapfile = false
       vim.opt_local.undofile = false
-      vim.opt_local.loadplugins = false
       vim.notify("Large file detected. Some features disabled.", vim.log.levels.WARN)
     end
   end,
@@ -379,7 +354,7 @@ autocmd("BufWritePre", {
     if event.match:match("^%w%w+://") then
       return
     end
-    local file = vim.loop.fs_realpath(event.match) or event.match
+    local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
   desc = "Create missing directories",

@@ -39,6 +39,7 @@ opt.sidescrolloff = 8            -- Minimum columns to keep left/right of cursor
 opt.pumheight = 10               -- Maximum items in popup menu
 opt.pumblend = 10                -- Popup menu transparency (0-30)
 opt.winblend = 0                 -- Floating window transparency
+opt.laststatus = 3               -- Global statusline (matches lualine globalstatus)
 
 -- Show invisible characters (like IntelliJ)
 opt.list = true
@@ -61,15 +62,8 @@ opt.smartindent = true           -- Auto-indent new lines
 opt.breakindent = true           -- Preserve indentation in wrapped lines
 opt.shiftround = true            -- Round indent to multiple of shiftwidth
 
--- Language-specific overrides (handled by ftplugin or autocmds)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact", "json", "yaml", "html", "css" },
-  callback = function()
-    opt.shiftwidth = 2
-    opt.tabstop = 2
-    opt.softtabstop = 2
-  end,
-})
+-- Language-specific indentation overrides are in lua/config/autocommands.lua
+-- (using vim.opt_local for correct buffer-local behavior)
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Search & Replace
@@ -103,7 +97,6 @@ opt.wildignore = {
 -- Performance
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 opt.lazyredraw = false           -- Redraw during macros (set to true if slow)
-opt.ttyfast = true               -- Fast terminal connection
 opt.synmaxcol = 300              -- Don't syntax highlight long lines
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
